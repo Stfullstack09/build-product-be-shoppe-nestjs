@@ -21,6 +21,7 @@ const createCategori_dto_1 = require("./dto/createCategori.dto");
 const enum_1 = require("../utils/enum");
 const typeCate_dto_1 = require("./dto/typeCate.dto");
 const updateFields_dto_1 = require("./dto/updateFields.dto");
+const updatePosition_dto_1 = require("./dto/updatePosition.dto");
 let CategoriesController = class CategoriesController {
     constructor(categoriesService) {
         this.categoriesService = categoriesService;
@@ -64,6 +65,9 @@ let CategoriesController = class CategoriesController {
             updateFieldsDTO.path_old_image = `/upload/folder/app/${file.filename}/categories`;
         }
         return this.categoriesService.updateFields(updateFieldsDTO);
+    }
+    async updatePositionCategories(updatePositionDTO) {
+        return this.categoriesService.updatePositionCategories(updatePositionDTO.data);
     }
 };
 exports.CategoriesController = CategoriesController;
@@ -110,6 +114,13 @@ __decorate([
     __metadata("design:paramtypes", [updateFields_dto_1.updateFieldsDTO, Object]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "updateFields", null);
+__decorate([
+    (0, common_1.Patch)('/update-position'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [updatePosition_dto_1.updatePositionDTO]),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "updatePositionCategories", null);
 exports.CategoriesController = CategoriesController = __decorate([
     (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])

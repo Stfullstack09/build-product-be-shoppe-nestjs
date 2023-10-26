@@ -15,3 +15,7 @@ export interface ICategoriesUpdateFields {
     image: File | string;
     is_active: string;
 }
+export interface IDataUpdatePositionCategory {
+    id: number;
+    position: number;
+}

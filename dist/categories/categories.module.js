@@ -26,6 +26,9 @@ let CategoriesModule = class CategoriesModule {
         }, {
             path: '/categories/updates-fields',
             method: common_1.RequestMethod.PUT,
+        }, {
+            path: '/categories/update-position',
+            method: common_1.RequestMethod.PATCH,
         });
     }
 };

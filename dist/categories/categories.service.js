@@ -124,6 +124,23 @@ let CategoriesService = class CategoriesService {
             message: 'Thành Công!',
         });
     }
+    async updatePositionCategories(data) {
+        const dataDump = data.map(async (item) => {
+            await this.categoriesRepository.update(item.id, {
+                position: item.position,
+            });
+        });
+        try {
+            await Promise.all(dataDump);
+            return (0, Respone_1.sendResponse)({
+                statusCode: common_1.HttpStatus.OK,
+                message: 'Thành Công!',
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 };
 exports.CategoriesService = CategoriesService;
 exports.CategoriesService = CategoriesService = __decorate([

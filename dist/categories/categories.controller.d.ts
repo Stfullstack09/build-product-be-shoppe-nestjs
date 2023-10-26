@@ -7,6 +7,7 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { typeCateDTO } from './dto/typeCate.dto';
 import { TypeCate } from 'src/typeORM/entities/Typecate';
 import { updateFieldsDTO } from './dto/updateFields.dto';
+import { updatePositionDTO } from './dto/updatePosition.dto';
 export declare class CategoriesController {
     private readonly categoriesService;
     constructor(categoriesService: CategoriesService);
@@ -19,6 +20,11 @@ export declare class CategoriesController {
     }>;
     getAllTypeCate(id: number, page?: number, pageSize?: number): Promise<Pagination<TypeCate>>;
     updateFields(updateFieldsDTO: updateFieldsDTO, file: Express.Multer.File): Promise<{
+        statusCode: HttpStatus;
+        message: string;
+        data: any;
+    }>;
+    updatePositionCategories(updatePositionDTO: updatePositionDTO): Promise<{
         statusCode: HttpStatus;
         message: string;
         data: any;
