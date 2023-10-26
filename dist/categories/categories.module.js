@@ -29,6 +29,12 @@ let CategoriesModule = class CategoriesModule {
         }, {
             path: '/categories/update-position',
             method: common_1.RequestMethod.PATCH,
+        }, {
+            path: '/categories/type-cate-update',
+            method: common_1.RequestMethod.PUT,
+        }, {
+            path: '/categories/update-position-typecate',
+            method: common_1.RequestMethod.PATCH,
         });
     }
 };

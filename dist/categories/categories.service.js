@@ -28,7 +28,6 @@ let CategoriesService = class CategoriesService {
         this.typeCategoriesRepository = typeCategoriesRepository;
     }
     async createCategoryWrapper(createCategoriDTO, file) {
-        console.log(file);
         if (!file && !file?.filename) {
             throw new common_1.BadRequestException();
         }
@@ -70,48 +69,6 @@ let CategoriesService = class CategoriesService {
             relations: ['type_cate'],
         });
     }
-    async createTypeCate(typeCateDTO) {
-        const checkCate = await this.categoriesRepository.findOne({
-            where: {
-                id: typeCateDTO.id_cate_parent,
-            },
-        });
-        if (!checkCate) {
-            throw new common_1.BadRequestException();
-        }
-        const dataInsert = typeCateDTO.name.map((item) => {
-            const obj = {};
-            obj.name = item;
-            obj.slug = `${(0, slugify_1.default)(item)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`;
-            obj.cate = checkCate;
-            return obj;
-        });
-        await this.typeCategoriesRepository.insert(dataInsert);
-        return (0, Respone_1.sendResponse)({
-            statusCode: common_1.HttpStatus.OK,
-            message: 'Bạn Đã Tạo Thành Công!',
-        });
-    }
-    async getAllTypeCate(id, option) {
-        const conditions = {
-            where: {},
-            relations: ['cate'],
-        };
-        if (id) {
-            const checkCateParent = await this.categoriesRepository.findOne({
-                where: {
-                    id,
-                },
-            });
-            if (!checkCateParent) {
-                throw new common_1.BadRequestException();
-            }
-            else {
-                conditions.where.cate = checkCateParent;
-            }
-        }
-        return (0, nestjs_typeorm_paginate_1.paginate)(this.typeCategoriesRepository, option, conditions);
-    }
     async updateFields(dataUpdate) {
         await this.categoriesRepository.update(dataUpdate.id, {
             title: dataUpdate.title,
@@ -127,6 +84,106 @@ let CategoriesService = class CategoriesService {
     async updatePositionCategories(data) {
         const dataDump = data.map(async (item) => {
             await this.categoriesRepository.update(item.id, {
+                position: item.position,
+            });
+        });
+        try {
+            await Promise.all(dataDump);
+            return (0, Respone_1.sendResponse)({
+                statusCode: common_1.HttpStatus.OK,
+                message: 'Thành Công!',
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    async createTypeCate(typeCateDTO) {
+        const checkCate = await this.categoriesRepository.findOne({
+            where: {
+                id: typeCateDTO.id_cate_parent,
+            },
+        });
+        if (!checkCate) {
+            throw new common_1.BadRequestException();
+        }
+        const checkPosition = await this.typeCategoriesRepository.find({
+            order: {
+                position: 'DESC',
+            },
+        });
+        if (!checkPosition || checkPosition.length === 0) {
+            typeCateDTO.position = 0;
+        }
+        else {
+            typeCateDTO.position = checkPosition[0].position + 1;
+        }
+        const dataInsert = typeCateDTO.name.map((item) => {
+            const obj = {
+                name: item,
+                slug: `${(0, slugify_1.default)(item)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`,
+                cate: checkCate,
+                position: typeCateDTO.position,
+            };
+            typeCateDTO.position += 1;
+            return obj;
+        });
+        await this.typeCategoriesRepository.insert(dataInsert);
+        return (0, Respone_1.sendResponse)({
+            statusCode: common_1.HttpStatus.OK,
+            message: 'Bạn Đã Tạo Thành Công!',
+        });
+    }
+    async getAllTypeCate(id, option, filter) {
+        const conditions = {
+            where: {},
+        };
+        if (id) {
+            const checkCateParent = await this.categoriesRepository.findOne({
+                where: {
+                    id,
+                },
+            });
+            if (!checkCateParent) {
+                throw new common_1.BadRequestException();
+            }
+            else {
+                conditions.where.cate = checkCateParent;
+            }
+        }
+        if ((filter && filter === 'cate') || filter === 'product') {
+            conditions.relations = [filter];
+        }
+        return (0, nestjs_typeorm_paginate_1.paginate)(this.typeCategoriesRepository, option, conditions);
+    }
+    async updateTypeCate(data) {
+        const dataDump = data.map(async (item) => {
+            const cate = await this.categoriesRepository.findOne({
+                where: {
+                    id: item.cate,
+                },
+            });
+            await this.typeCategoriesRepository.update(item.id, {
+                name: item.name,
+                slug: `${(0, slugify_1.default)(item.name)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`,
+                cate: cate,
+                is_active: JSON.parse(item.is_active),
+            });
+        });
+        try {
+            await Promise.all(dataDump);
+            return (0, Respone_1.sendResponse)({
+                statusCode: common_1.HttpStatus.OK,
+                message: 'Thành Công!',
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    async updatePositionTypeCategories(data) {
+        const dataDump = data.map(async (item) => {
+            await this.typeCategoriesRepository.update(item.id, {
                 position: item.position,
             });
         });

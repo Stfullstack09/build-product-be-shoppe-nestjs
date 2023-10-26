@@ -22,6 +22,7 @@ const enum_1 = require("../utils/enum");
 const typeCate_dto_1 = require("./dto/typeCate.dto");
 const updateFields_dto_1 = require("./dto/updateFields.dto");
 const updatePosition_dto_1 = require("./dto/updatePosition.dto");
+const updateTypeCate_dto_1 = require("./dto/updateTypeCate.dto");
 let CategoriesController = class CategoriesController {
     constructor(categoriesService) {
         this.categoriesService = categoriesService;
@@ -37,16 +38,13 @@ let CategoriesController = class CategoriesController {
             route: `${enum_1.ConfigEnum.URL_BACKEND_ALL_CATEGORIES}`,
         }, query);
     }
-    createTypeCate(typeCateDTO) {
-        return this.categoriesService.createTypeCate(typeCateDTO);
-    }
-    getAllTypeCate(id, page = 1, pageSize = 1) {
+    getAllTypeCate(id, page = 1, pageSize = 1, filter) {
         return this.categoriesService.getAllTypeCate(id, {
             limit: pageSize,
             page: page,
             cacheQueries: true,
             route: `${enum_1.ConfigEnum.URL_BACKEND_ALL_TYPE_CATEGORIES}`,
-        });
+        }, filter);
     }
     async updateFields(updateFieldsDTO, file) {
         if (JSON.parse(updateFieldsDTO.is_change_image)) {
@@ -69,6 +67,15 @@ let CategoriesController = class CategoriesController {
     async updatePositionCategories(updatePositionDTO) {
         return this.categoriesService.updatePositionCategories(updatePositionDTO.data);
     }
+    createTypeCate(typeCateDTO) {
+        return this.categoriesService.createTypeCate(typeCateDTO);
+    }
+    updateTypeCate(updateTypeDTO) {
+        return this.categoriesService.updateTypeCate(updateTypeDTO.data);
+    }
+    async updatePositionTypeCategories(updatePositionDTO) {
+        return this.categoriesService.updatePositionTypeCategories(updatePositionDTO.data);
+    }
 };
 exports.CategoriesController = CategoriesController;
 __decorate([
@@ -90,19 +97,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getAllCategories", null);
 __decorate([
-    (0, common_1.Post)('/type-cate'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeCate_dto_1.typeCateDTO]),
-    __metadata("design:returntype", void 0)
-], CategoriesController.prototype, "createTypeCate", null);
-__decorate([
     (0, common_1.Get)('/all-type-cates'),
     __param(0, (0, common_1.Query)('q')),
     __param(1, (0, common_1.Query)('page', new common_1.DefaultValuePipe(1), common_1.ParseIntPipe)),
     __param(2, (0, common_1.Query)('pageSize', new common_1.DefaultValuePipe(1), common_1.ParseIntPipe)),
+    __param(3, (0, common_1.Query)('filter')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number, Number]),
+    __metadata("design:paramtypes", [Number, Number, Number, String]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "getAllTypeCate", null);
 __decorate([
@@ -121,6 +122,27 @@ __decorate([
     __metadata("design:paramtypes", [updatePosition_dto_1.updatePositionDTO]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "updatePositionCategories", null);
+__decorate([
+    (0, common_1.Post)('/type-cate'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeCate_dto_1.typeCateDTO]),
+    __metadata("design:returntype", void 0)
+], CategoriesController.prototype, "createTypeCate", null);
+__decorate([
+    (0, common_1.Put)('/type-cate-update'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [updateTypeCate_dto_1.updateTypeDTO]),
+    __metadata("design:returntype", void 0)
+], CategoriesController.prototype, "updateTypeCate", null);
+__decorate([
+    (0, common_1.Patch)('/update-position-typecate'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [updatePosition_dto_1.updatePositionDTO]),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "updatePositionTypeCategories", null);
 exports.CategoriesController = CategoriesController = __decorate([
     (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])

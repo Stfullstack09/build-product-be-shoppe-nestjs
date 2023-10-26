@@ -6,6 +6,7 @@ export interface CreateCateGories {
 export interface ICreateTypeCate {
     id_cate_parent: number;
     name: string[];
+    position?: number;
 }
 export interface ICategoriesUpdateFields {
     id: number;
@@ -18,4 +19,10 @@ export interface ICategoriesUpdateFields {
 export interface IDataUpdatePositionCategory {
     id: number;
     position: number;
+}
+export interface IDataUpdateTypeCategory {
+    id: number;
+    name: string;
+    cate: number;
+    is_active: string;
 }

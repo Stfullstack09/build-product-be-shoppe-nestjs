@@ -5,6 +5,8 @@ export declare class TypeCate {
     name: string;
     slug: string;
     product: Product[];
+    position: number;
+    is_active: boolean;
     cate: Categories;
     created_At: Date;
     updated_At: Date;

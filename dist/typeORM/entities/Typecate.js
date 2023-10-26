@@ -35,6 +35,18 @@ __decorate([
     __metadata("design:type", Array)
 ], TypeCate.prototype, "product", void 0);
 __decorate([
+    (0, typeorm_1.Column)({
+        nullable: false,
+    }),
+    __metadata("design:type", Number)
+], TypeCate.prototype, "position", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        default: true,
+    }),
+    __metadata("design:type", Boolean)
+], TypeCate.prototype, "is_active", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => Categorie_1.Categories, (category) => category.type_cate),
     __metadata("design:type", Categorie_1.Categories)
 ], TypeCate.prototype, "cate", void 0);
