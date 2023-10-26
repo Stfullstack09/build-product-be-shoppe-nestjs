@@ -1,0 +1,34 @@
+import { Address } from './Addres';
+import { Product } from './Product';
+import { Evaluates } from './Evaluate';
+import { Shop } from './Shop';
+import { Notification } from './Notify';
+import { LoginHistory } from './LoginHistory';
+import { VerifyUser } from './Verify';
+import { Voucher } from './Voucher';
+export declare class User {
+    id: number;
+    email: string;
+    userName: string;
+    fullName: string;
+    password: string;
+    birthDay: string;
+    avatar: string;
+    phoneNumber: string;
+    role: string;
+    address: Address[];
+    like: Product[];
+    evaluates: Evaluates[];
+    followers: Shop[];
+    vouchers: Voucher[];
+    tick: boolean;
+    isSuperAdmin: boolean;
+    notifications: Notification[];
+    shop_manage: Shop[];
+    loginHistories: LoginHistory[];
+    verifyUser: VerifyUser;
+    admin_shop: Shop;
+    isBlocked: boolean;
+    created_At: Date;
+    updated_At: Date;
+}

@@ -1,0 +1,17 @@
+import { Address } from './entities/Addres';
+import { AllCode } from './entities/AllCode';
+import { Categories } from './entities/Categorie';
+import { Evaluates } from './entities/Evaluate';
+import { FlashSale } from './entities/FlashSale';
+import { Image } from './entities/Image';
+import { PostBanners } from './entities/IntroPost';
+import { LoginHistory } from './entities/LoginHistory';
+import { Notification } from './entities/Notify';
+import { Product } from './entities/Product';
+import { Shop } from './entities/Shop';
+import { TypeCate } from './entities/Typecate';
+import { User } from './entities/User';
+import { VerifyUser } from './entities/Verify';
+import { Voucher } from './entities/Voucher';
+declare const entities: (typeof Image | typeof Product | typeof AllCode | typeof Shop | typeof User | typeof Categories | typeof TypeCate | typeof Evaluates | typeof FlashSale | typeof Voucher | typeof Notification | typeof LoginHistory | typeof VerifyUser | typeof Address | typeof PostBanners)[];
+export default entities;
