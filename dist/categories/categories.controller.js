@@ -76,6 +76,9 @@ let CategoriesController = class CategoriesController {
     async updatePositionTypeCategories(updatePositionDTO) {
         return this.categoriesService.updatePositionTypeCategories(updatePositionDTO.data);
     }
+    searchTypeCategories(q = '') {
+        return this.categoriesService.searchTypeCategories(q);
+    }
 };
 exports.CategoriesController = CategoriesController;
 __decorate([
@@ -143,6 +146,13 @@ __decorate([
     __metadata("design:paramtypes", [updatePosition_dto_1.updatePositionDTO]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "updatePositionTypeCategories", null);
+__decorate([
+    (0, common_1.Get)('/type-cate/search'),
+    __param(0, (0, common_1.Query)('q', new common_1.DefaultValuePipe(''))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], CategoriesController.prototype, "searchTypeCategories", null);
 exports.CategoriesController = CategoriesController = __decorate([
     (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])

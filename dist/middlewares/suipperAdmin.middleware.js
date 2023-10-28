@@ -39,7 +39,7 @@ let SupperAdminMiddleware = class SupperAdminMiddleware {
                 }
                 else {
                     res.status(common_1.HttpStatus.FORBIDDEN).json((0, Respone_1.sendResponse)({
-                        statusCode: common_1.HttpStatus.OK,
+                        statusCode: common_1.HttpStatus.FORBIDDEN,
                         message: 'Role does not exist',
                     }));
                 }

@@ -40,4 +40,5 @@ export declare class CategoriesController {
         message: string;
         data: any;
     }>;
+    searchTypeCategories(q?: string): Promise<TypeCate[]>;
 }

@@ -63,10 +63,10 @@ let CategoriesService = class CategoriesService {
         }
         return (0, nestjs_typeorm_paginate_1.paginate)(this.categoriesRepository, option, {
             where: condition,
+            relations: ['type_cate'],
             order: {
                 position: 'ASC',
             },
-            relations: ['type_cate'],
         });
     }
     async updateFields(dataUpdate) {
@@ -108,6 +108,9 @@ let CategoriesService = class CategoriesService {
             throw new common_1.BadRequestException();
         }
         const checkPosition = await this.typeCategoriesRepository.find({
+            where: {
+                cate: checkCate,
+            },
             order: {
                 position: 'DESC',
             },
@@ -137,6 +140,9 @@ let CategoriesService = class CategoriesService {
     async getAllTypeCate(id, option, filter) {
         const conditions = {
             where: {},
+            order: {
+                position: 'ASC',
+            },
         };
         if (id) {
             const checkCateParent = await this.categoriesRepository.findOne({
@@ -157,21 +163,49 @@ let CategoriesService = class CategoriesService {
         return (0, nestjs_typeorm_paginate_1.paginate)(this.typeCategoriesRepository, option, conditions);
     }
     async updateTypeCate(data) {
-        const dataDump = data.map(async (item) => {
-            const cate = await this.categoriesRepository.findOne({
-                where: {
-                    id: item.cate,
-                },
-            });
-            await this.typeCategoriesRepository.update(item.id, {
-                name: item.name,
-                slug: `${(0, slugify_1.default)(item.name)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`,
-                cate: cate,
-                is_active: JSON.parse(item.is_active),
-            });
-        });
         try {
-            await Promise.all(dataDump);
+            await Promise.all(data.map(async (item) => {
+                const cate = await this.categoriesRepository.findOne({
+                    where: {
+                        id: item.cate,
+                    },
+                });
+                if (cate) {
+                    const checkNewTypeCate = await this.typeCategoriesRepository.findOne({
+                        where: {
+                            cate,
+                            id: item.id,
+                        },
+                    });
+                    const checkPosition = await this.typeCategoriesRepository.find({
+                        where: {
+                            cate,
+                        },
+                        order: {
+                            position: 'DESC',
+                        },
+                    });
+                    const dataPosition = {
+                        position: 0,
+                    };
+                    if (!checkPosition || checkPosition.length === 0) {
+                        dataPosition.position = 0;
+                    }
+                    else {
+                        dataPosition.position = checkPosition[0].position + 1;
+                    }
+                    if (!checkNewTypeCate) {
+                        item.position = dataPosition.position;
+                    }
+                    await this.typeCategoriesRepository.update(item.id, {
+                        name: item.name,
+                        slug: `${(0, slugify_1.default)(item.name)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`,
+                        cate,
+                        is_active: JSON.parse(item.is_active),
+                        position: item.position,
+                    });
+                }
+            }));
             return (0, Respone_1.sendResponse)({
                 statusCode: common_1.HttpStatus.OK,
                 message: 'Thành Công!',
@@ -197,6 +231,15 @@ let CategoriesService = class CategoriesService {
         catch (error) {
             console.log(error);
         }
+    }
+    async searchTypeCategories(q) {
+        if (!q) {
+            throw new common_1.BadRequestException();
+        }
+        console.log(q);
+        return this.typeCategoriesRepository.find({
+            where: [{ name: (0, typeorm_2.Like)(`%${q}%`) }],
+        });
     }
 };
 exports.CategoriesService = CategoriesService;

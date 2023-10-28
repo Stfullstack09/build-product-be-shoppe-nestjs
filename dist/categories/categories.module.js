@@ -35,6 +35,9 @@ let CategoriesModule = class CategoriesModule {
         }, {
             path: '/categories/update-position-typecate',
             method: common_1.RequestMethod.PATCH,
+        }, {
+            path: '/categories/type-cate/search',
+            method: common_1.RequestMethod.GET,
         });
     }
 };

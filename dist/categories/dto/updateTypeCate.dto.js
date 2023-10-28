@@ -29,6 +29,10 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], updateType.prototype, "is_active", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], updateType.prototype, "position", void 0);
 class updateTypeDTO {
 }
 exports.updateTypeDTO = updateTypeDTO;

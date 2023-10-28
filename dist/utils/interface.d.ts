@@ -25,4 +25,5 @@ export interface IDataUpdateTypeCategory {
     name: string;
     cate: number;
     is_active: string;
+    position?: number;
 }

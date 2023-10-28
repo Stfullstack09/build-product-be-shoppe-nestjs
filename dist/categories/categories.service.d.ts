@@ -37,4 +37,5 @@ export declare class CategoriesService {
         message: string;
         data: any;
     }>;
+    searchTypeCategories(q: string): Promise<TypeCate[]>;
 }
