@@ -32,6 +32,7 @@ export declare class ShopController {
         is_sell: boolean;
         is_shoppe_mail: boolean;
         products: import("../typeORM/entities/Product").Product[];
+        vouchers: import("../typeORM/entities/Voucher").Voucher[];
         created_At: Date;
         updated_At: Date;
     } & Shop>;

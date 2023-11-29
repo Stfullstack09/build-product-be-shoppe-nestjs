@@ -1,5 +1,6 @@
 import { Product } from './Product';
 import { User } from './User';
+import { Voucher } from './Voucher';
 export declare class Shop {
     id: number;
     thumbnail_url: string;
@@ -19,6 +20,7 @@ export declare class Shop {
     is_sell: boolean;
     is_shoppe_mail: boolean;
     products: Product[];
+    vouchers: Voucher[];
     created_At: Date;
     updated_At: Date;
 }

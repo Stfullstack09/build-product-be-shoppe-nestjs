@@ -13,6 +13,7 @@ exports.Shop = void 0;
 const typeorm_1 = require("typeorm");
 const Product_1 = require("./Product");
 const User_1 = require("./User");
+const Voucher_1 = require("./Voucher");
 let Shop = class Shop {
 };
 exports.Shop = Shop;
@@ -103,6 +104,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Product_1.Product, (product) => product.shop),
     __metadata("design:type", Array)
 ], Shop.prototype, "products", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Voucher_1.Voucher, (voucher) => voucher.shop),
+    __metadata("design:type", Array)
+], Shop.prototype, "vouchers", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         default: () => 'CURRENT_TIMESTAMP',

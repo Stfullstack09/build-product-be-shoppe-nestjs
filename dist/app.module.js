@@ -19,6 +19,7 @@ const upload_module_1 = require("./upload/upload.module");
 const notify_module_1 = require("./notify/notify.module");
 const device_module_1 = require("./device/device.module");
 const categories_module_1 = require("./categories/categories.module");
+const voucher_module_1 = require("./voucher/voucher.module");
 let envFilePath = '.env.development';
 if (process.env.ENVIRONMENT === 'PRODUCTION')
     envFilePath = '.env.production';
@@ -47,6 +48,7 @@ exports.AppModule = AppModule = __decorate([
             notify_module_1.NotifyModule,
             device_module_1.DeviceModule,
             categories_module_1.CategoriesModule,
+            voucher_module_1.VoucherModule,
         ],
         controllers: [],
         providers: [],

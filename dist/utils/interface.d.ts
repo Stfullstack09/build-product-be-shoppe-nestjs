@@ -27,3 +27,13 @@ export interface IDataUpdateTypeCategory {
     is_active: string;
     position?: number;
 }
+export interface IDataCreateVoucher {
+    label: string;
+    discount: number;
+    max_price_discount: number;
+    expires_at: number;
+    count_init: number;
+    price_order_min: number;
+    is_global_shoppe: boolean;
+    is_unlimited_use: boolean;
+}

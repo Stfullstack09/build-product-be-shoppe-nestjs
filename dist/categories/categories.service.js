@@ -165,11 +165,14 @@ let CategoriesService = class CategoriesService {
     async updateTypeCate(data) {
         try {
             await Promise.all(data.map(async (item) => {
-                const cate = await this.categoriesRepository.findOne({
-                    where: {
-                        id: item.cate,
-                    },
-                });
+                let cate = null;
+                if (item.cate) {
+                    cate = await this.categoriesRepository.findOne({
+                        where: {
+                            id: item.cate,
+                        },
+                    });
+                }
                 if (cate) {
                     const checkNewTypeCate = await this.typeCategoriesRepository.findOne({
                         where: {
@@ -205,6 +208,15 @@ let CategoriesService = class CategoriesService {
                         position: item.position,
                     });
                 }
+                else {
+                    await this.typeCategoriesRepository.update(item.id, {
+                        name: item.name,
+                        slug: `${(0, slugify_1.default)(item.name)}-${new Date().getTime()}-${(0, uuid_1.v4)()}`,
+                        cate: null,
+                        is_active: JSON.parse(item.is_active),
+                        position: item.position,
+                    });
+                }
             }));
             return (0, Respone_1.sendResponse)({
                 statusCode: common_1.HttpStatus.OK,
@@ -236,9 +248,9 @@ let CategoriesService = class CategoriesService {
         if (!q) {
             throw new common_1.BadRequestException();
         }
-        console.log(q);
         return this.typeCategoriesRepository.find({
-            where: [{ name: (0, typeorm_2.Like)(`%${q}%`) }],
+            where: [{ name: (0, typeorm_2.Like)(`%${q}%`) }, { slug: (0, typeorm_2.Like)(`%${q}%`) }],
+            relations: ['cate'],
         });
     }
 };

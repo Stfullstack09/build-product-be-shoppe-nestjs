@@ -18,7 +18,7 @@ const Shop_1 = require("./Shop");
 const Notify_1 = require("./Notify");
 const LoginHistory_1 = require("./LoginHistory");
 const Verify_1 = require("./Verify");
-const Voucher_1 = require("./Voucher");
+const UserVoucher_1 = require("./UserVoucher");
 let User = class User {
 };
 exports.User = User;
@@ -94,10 +94,9 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "followers", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => Voucher_1.Voucher),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.OneToMany)(() => UserVoucher_1.UserVoucher, (userVoucher) => userVoucher.user),
     __metadata("design:type", Array)
-], User.prototype, "vouchers", void 0);
+], User.prototype, "user_voucher", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         default: false,

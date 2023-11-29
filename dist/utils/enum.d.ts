@@ -13,5 +13,6 @@ export declare enum ConfigEnum {
     URL_BACKEND = "http://localhost:8080",
     URL_BACKEND_NOTIFY = "http://localhost:8080/notify",
     URL_BACKEND_ALL_CATEGORIES = "http://localhost:8080/categories",
-    URL_BACKEND_ALL_TYPE_CATEGORIES = "http://localhost:8080/categories/all-type-cates"
+    URL_BACKEND_ALL_TYPE_CATEGORIES = "http://localhost:8080/categories/all-type-cates",
+    URL_BACKEND_ALL_VOUCHER_SHOPPE = "http://localhost:8080/voucher/shoppe"
 }

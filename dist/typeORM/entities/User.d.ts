@@ -5,7 +5,7 @@ import { Shop } from './Shop';
 import { Notification } from './Notify';
 import { LoginHistory } from './LoginHistory';
 import { VerifyUser } from './Verify';
-import { Voucher } from './Voucher';
+import { UserVoucher } from './UserVoucher';
 export declare class User {
     id: number;
     email: string;
@@ -20,7 +20,7 @@ export declare class User {
     like: Product[];
     evaluates: Evaluates[];
     followers: Shop[];
-    vouchers: Voucher[];
+    user_voucher: UserVoucher[];
     tick: boolean;
     isSuperAdmin: boolean;
     notifications: Notification[];

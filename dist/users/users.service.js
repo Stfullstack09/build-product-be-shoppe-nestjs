@@ -36,7 +36,7 @@ let UsersService = class UsersService {
                 'like',
                 'evaluates',
                 'followers',
-                'voichers',
+                'user_voucher.voucher',
                 'notifications',
                 'shop_manage',
                 'loginHistories',

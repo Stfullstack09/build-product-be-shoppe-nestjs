@@ -19,7 +19,6 @@ let JwtMiddleware = class JwtMiddleware {
         this.jwtService = jwtService;
     }
     async use(req, res, next) {
-        console.log('user');
         if (req && !(0, lodash_1.isEmpty)(req.cookies)) {
             const access_token = req.cookies.access_token;
             if (!access_token) {

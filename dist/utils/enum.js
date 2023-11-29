@@ -23,5 +23,6 @@ var ConfigEnum;
     ConfigEnum["URL_BACKEND_NOTIFY"] = "http://localhost:8080/notify";
     ConfigEnum["URL_BACKEND_ALL_CATEGORIES"] = "http://localhost:8080/categories";
     ConfigEnum["URL_BACKEND_ALL_TYPE_CATEGORIES"] = "http://localhost:8080/categories/all-type-cates";
+    ConfigEnum["URL_BACKEND_ALL_VOUCHER_SHOPPE"] = "http://localhost:8080/voucher/shoppe";
 })(ConfigEnum || (exports.ConfigEnum = ConfigEnum = {}));
 //# sourceMappingURL=enum.js.map

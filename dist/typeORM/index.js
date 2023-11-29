@@ -13,6 +13,7 @@ const Product_1 = require("./entities/Product");
 const Shop_1 = require("./entities/Shop");
 const Typecate_1 = require("./entities/Typecate");
 const User_1 = require("./entities/User");
+const UserVoucher_1 = require("./entities/UserVoucher");
 const Verify_1 = require("./entities/Verify");
 const Video_1 = require("./entities/Video");
 const Voucher_1 = require("./entities/Voucher");
@@ -33,6 +34,7 @@ const entities = [
     Notify_1.Notification,
     LoginHistory_1.LoginHistory,
     Verify_1.VerifyUser,
+    UserVoucher_1.UserVoucher,
 ];
 exports.default = entities;
 //# sourceMappingURL=index.js.map
